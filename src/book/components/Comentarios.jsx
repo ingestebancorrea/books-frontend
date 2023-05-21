@@ -22,7 +22,7 @@ return (
   comentarios ? (
     <Grid container alignItems="center" spacing={1} sx={{ pl: '20px' }}>
       {comentarios.map((item) => (
-        <Grid item xs={12} sm={12} md={7.5} key={item.id}>
+        <Grid item xs={12} sm={7.5} key={item.id} sx={{ maxWidth: '100%', width: '100%' }}>
           <Card
             component={Grid}
             container

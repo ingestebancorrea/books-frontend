@@ -26,7 +26,7 @@ export const BookItem = ({ book }) => {
   return  (
     book !== null ? (
     <Grid container spacing={2} justify="center" sx={{ pl: '35px' }}>
-      <Grid item xs={12} sm={12} md={12} sx={{ maxWidth: '100%' }}>
+      <Grid item xs={12} sm={12}  sx={{ maxWidth: '100%', width: '100%' }}>
         <Card
           component={Grid}
           container
@@ -38,7 +38,6 @@ export const BookItem = ({ book }) => {
               width: "800px",
             }
           }}
-
         >
           <Grid item xs={5}>
             <CardMedia
