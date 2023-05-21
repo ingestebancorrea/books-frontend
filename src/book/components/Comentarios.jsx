@@ -19,7 +19,7 @@ export const Comentarios = ({ comentarios }) => {
 
   
 return (
-  comentarios !== null ? (
+  comentarios ? (
     <Grid container alignItems="center" spacing={1} sx={{ pl: '20px' }}>
       {comentarios.map((item) => (
         <Grid item xs={12} sm={12} md={7.5} key={item.id}>
@@ -82,11 +82,7 @@ return (
       ))}
     </Grid>
   ) : (
-    <Grid container>
-      <Grid item>
-        <Alert severity="error">No se encontraron comentarios.</Alert>
-      </Grid>
-    </Grid>
+    null
   )
-);
+  );
 }

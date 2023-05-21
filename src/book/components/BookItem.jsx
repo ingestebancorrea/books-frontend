@@ -23,7 +23,8 @@ export const BookItem = ({ book }) => {
     return parsedValoration;
   };
 
-  return book !== null ? (
+  return  (
+    book !== null ? (
     <Grid container spacing={2} justify="center" sx={{ pl: '35px' }}>
       <Grid item xs={12} sm={12} md={12} sx={{ maxWidth: '100%' }}>
         <Card
@@ -90,5 +91,6 @@ export const BookItem = ({ book }) => {
         <Alert severity="error">No se encontró el libro.</Alert>
       </Grid>
     </Grid>
+  )
   );
 };
