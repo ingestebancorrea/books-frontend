@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux"
 import { BookCard } from "../components"
 import { BookLayout } from "../layout/BookLayout"
-import { Alert, Grid, Typography } from "@mui/material";
+import { Alert, Grid } from "@mui/material";
 
 export const BooksSearchPage = () => {
 
   const { searchResults }  = useSelector(state => state.book);
-  console.log(searchResults);
+
   return (
     <BookLayout>
       {

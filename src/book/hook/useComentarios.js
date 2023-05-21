@@ -1,11 +1,14 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { setBook } from '../../store/book/bookSlice';
+
 
 const useComentarios = ( ) => {
+    const { id } = useParams();
 
-    const [comentarios, setComentarios] = useState([]);
-    
     const { displayName, photoURL } = useSelector(state => state.auth);
+
+    const dispatch = useDispatch();
 
     const cargarComentarios = async (id) => {
         try {
@@ -13,20 +16,23 @@ const useComentarios = ( ) => {
             const respuesta = await fetch(`http://localhost:3002/api/v1/book/${id}`);
             const comentarios = await respuesta.json();
 
-            // Actualizar el estado de los comentarios
-            setComentarios(comentarios.reseñas);
+            //Actualizar comentarios
+            if(comentarios){
+                dispatch(setBook(comentarios));
+            }
         } catch (error) {
             console.error('Error al cargar los comentarios:', error);
         }
     };
 
-    const agregarComentario = async (_id, data) => {
+    const agregarComentario = async (_id, comentario, ratingValue) => {
         try {
             const requestBody = {
                 username: displayName,
-                comentario: data,
+                comentario,
                 fecha: new Date(),
-                image_url: photoURL
+                image_url: photoURL,
+                valoracion: ratingValue
             };
 
             const response = await fetch(`http://localhost:3002/api/v1/book/${_id}/review`, {
@@ -37,8 +43,8 @@ const useComentarios = ( ) => {
                 body: JSON.stringify(requestBody)
             });
 
-            if (!response.ok) {
-                throw new Error('Error al agregar el comentario');
+            if (response.ok) {
+               cargarComentarios(id);
             }
         } catch (error) {
             console.error('Error al agregar el comentario:', error);
@@ -46,7 +52,6 @@ const useComentarios = ( ) => {
     };
 
     return {
-        comentarios,
         cargarComentarios,
         agregarComentario,
     };
